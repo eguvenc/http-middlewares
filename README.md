@@ -1,7 +1,7 @@
 
 ### Http Middlewares
 
-> All middlewares are listed below for <kbd>version 1.0</kbd>
+> All middlewares of <kbd>version 1.0</b> are listed below.
 
 <table>
     <thead>
