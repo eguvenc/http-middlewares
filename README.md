@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td>Csrf</td>
-            <td>Middleware for verify csrf form requests.</td>
+            <td>Middleware to verify csrf form requests.</td>
         </tr>
         <tr>
             <td>Debugger</td>
@@ -66,7 +66,7 @@
         </tr>
         <tr>
             <td>Translation</td>
-            <td>Middleware for read and write language variable to http cookie.</td>
+            <td>Middleware to read/write language variable to http cookie.</td>
         </tr>
         <tr>
             <td>TrustedIp</td>
