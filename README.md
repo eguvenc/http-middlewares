@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td>Debugger</td>
-            <td>Middleware to emit page requests to http debugger websocket server.</td>
+            <td>Middleware to forward page requests to http debugger websocket server.</td>
         </tr>
         <tr>
             <td>Error</td>
