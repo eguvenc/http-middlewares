@@ -26,11 +26,11 @@
         </tr>
         <tr>
             <td>Csrf</td>
-            <td>Middleware for to verify csrf form requests.</td>
+            <td>Middleware for verify csrf form requests.</td>
         </tr>
         <tr>
             <td>Debugger</td>
-            <td>Middleware for emit page requests to http debugger websocket server.</td>
+            <td>Middleware to emit page requests to http debugger websocket server.</td>
         </tr>
         <tr>
             <td>Error</td>
@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <td>Https</td>
-            <td>Middleware for force unsecure http requests to secure.</td>
+            <td>Middleware to force unsecure http requests to secure.</td>
         </tr>
         <tr>
             <td>Maintenance</td>
@@ -74,7 +74,7 @@
         </tr>
         <tr>
             <td>View</td>
-            <td>Middleware to create view layouts using Layer package.</td>
+            <td>Middleware to create view layouts using layer package.</td>
         </tr>
     </tbody>
 </table>
