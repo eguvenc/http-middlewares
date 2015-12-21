@@ -3,11 +3,6 @@
 
 > Version 1.0 middlewares listed below.
 
-
-### Http Middlewares
-
-> Version 1.0 middlewares listed below.
-
 <table>
     <thead>
         <tr>
