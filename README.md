@@ -3,6 +3,12 @@
 
 > All middlewares of <kbd>version 1.0</kbd> are listed below.
 
+### Available Docs
+
+* [TR](docs/tr)
+
+### List Of Middlewares
+
 <table>
     <thead>
         <tr>
