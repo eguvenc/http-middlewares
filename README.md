@@ -26,10 +26,6 @@
             <td>Middleware for authorized users.</td>
         </tr>
         <tr>
-            <td>Csrf</td>
-            <td>Middleware to verify csrf form requests.</td>
-        </tr>
-        <tr>
             <td>Debugger</td>
             <td>Middleware to forward page requests to http debugger websocket server.</td>
         </tr>

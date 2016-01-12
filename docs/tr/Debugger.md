@@ -1,51 +1,30 @@
 
-## Çıktı Görüntüleyici (Debugger)
+## Çıktı Görüntüleyici
 
-Debugger paketi uygulamanın geliştirilmesi esnasında uygulama isteklerinden sonra oluşan ortam bileşenleri ve arka plan log verilerini görselleştirir. Debugger modülü aktifken uygulama ziyaret edildir ve uygulama çalışırken bir başka yeni pencerede <kbd>http://yourproject/debugger</kbd> adresine girilerek bu sayfada http, konsol, ajax log verileri ve ortam bilgileri ( $_POST, $_SERVER, $_GET, $_SESSION, $_COOKIE, http başlıkları, http gövdesi ) websocket bağlantısı ile dinamik olarak görüntülenir.
+Çıktı görüntüleyici uygulama isteklerinden sonra oluşan ortam bileşenleri ve arka plan log verilerini görselleştirir. Debugger modülü aktifken uygulama ziyaret edildir ve uygulama çalışırken bir başka yeni pencerede <kbd>http://yourproject/debugger</kbd> adresine girilerek bu sayfada http, konsol, ajax log verileri ve ortam bilgileri ( http başlıkları, http gövdesi ) websocket bağlantısı ile dinamik olarak görüntülenir.
 
 ### Konfigürasyon
 
-<kbd>app/local/config.php</kbd> dosyasından debugger modülü websocket bağlantısını aktif edin.
+Çıktı görüntüleyicinin log dosyalarını okuyabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde aşağıdaki gibi herhangi bir önemlilik seviyesinde tanımlı olması gerekir.
 
 ```php
-return array(
-
-    'http' => [
-        'debugger' => [
-            'enabled' => true,
-            'socket' => 'ws://127.0.0.1:9000'
-        ]
-    ],
-    
-)
-```
-
-Logların okunabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde <kbd>'registerHandler' => [5, 'file']]</kbd> konfigürasyonu ile aşağıdaki gibi tanımlı olması gerekir.
-
-```php
-    'methods' => [
-        ['registerFilter' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
-        ['registerHandler' => [5, 'file']],
-        ['registerHandler' => [4, 'mongo']],
-        ['filter' => ['priority@notIn', array(LOG_DEBUG)]],
-        ['registerHandler' => [3, 'email']],
-        ['filter' => ['priority@notIn', array(LOG_DEBUG)]],
-        ['setWriter' => ['file']],
-        ['filter' => ['priority@notIn', array()]],
-    ]
+'methods' => [
+    ['registerFilter' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
+    ['registerHandler' => [5, 'file']],
+    .
+    .
+]
 ```
 
 ### Middleware
-
-Aşağıdaki kaynaktan <b>Debugger.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 ```php
 http://github.com/obullo/http-middlewares/
 ```
 
-### Linux / Mac
+Yularıdaki kaynaktan <kbd>Debugger.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
-----
+### Linux / Mac Kurulumu
 
 #### Kurulum
 
@@ -65,7 +44,7 @@ php task module remove debugger
 
 #### Çalıştırma
 
-Debugger ın çalışabilmesi için debug task dosyasını debugger sunucusu olarak arka planda çalıştırmanız gerekir. Bunun için konsolunuza aşağıdaki komutu girin.
+Debugger ın çalışabilmesi için debugger sunucusu arka planda çalıştırmanız gerekir. Bunun için konsolunuza aşağıdaki komutu girin.
 
 ```php
 php task debugger
@@ -84,11 +63,9 @@ Eğer debugger kurulumu doğru gerçekleşti ise aşağıdaki gibi bir sayfa ile
 Websocket bağlantısı bazı tarayıcılarda kendiliğinden kopabilir panel üzerindeki ![Closed](images/socket-closed.png?raw=true "Socket Closed") simgesi debugger sunucusuna ait bağlantının koptuğunu ![Open](images/socket-open.png?raw=true "Socket Open") simgesi ise bağlantının aktif olduğunu gösterir. Eğer bağlantı koparsa verileri sayfa yenilemesi olmadan takip edemezsiniz. Böyle bir durumda debugger sunucunuzu ve tarayıcınızı yeniden başlatmayı deneyin.
 
 
-### Windows
+### Windows Kurulumu
 
-----
-
-#### Kurulum 
+#### Kurulum
 
 Bu örnekte Xampp Programı baz alınmıştır. Aşağıdaki komutu konsoldan çalıştırın.
 
@@ -106,7 +83,7 @@ C:\xampp\php\php.exe -f "C:\xampp\htdocs\myproject\task" module remove debugger
 
 #### Çalıştırma
 
-Debugger ın çalışabilmesi için debug task dosyasını debugger sunucusu olarak arka planda çalıştırmanız gerekir. Bunun için konsolunuza aşağıdaki komutu girin.
+Debugger ın çalışabilmesi için debugger sunucusu arka planda çalıştırmanız gerekir. Bunun için konsolunuza aşağıdaki komutu girin.
 
 ```php
 C:\xampp\php\php.exe -f "C:\xampp\htdocs\myproject\task" debugger

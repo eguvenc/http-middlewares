@@ -1,9 +1,7 @@
 
 ## Error Katmanı
 
-> Error katmanı uygulamanızda gerçekleşecek istisnai hataları yada bir katman içerisinde gerçekleşebilecek hataları kontrol eder. Temel olarak MiddlewareInterface ile aynıdır. İstenirse son parametre kullanılarak $err = "" değişkeni ile $next() fonksiyonuna özel hatalar gönderilebilir. Eğer hata gönderilmez ise bir sonraki yanıt $next() fonksiyonunu çalıştırır hata gönderilir ise katman hata çıktısı ile birlikte response nesnesine döner.
-
-bknz. <a href="https://github.com/zendframework/zend-stratigility" target="_blank">Zend/Stratigility</a> 
+Error katmanı <a href="https://github.com/zendframework/zend-stratigility" target="_blank">Http/Zend/Stratigility</a> paketi ile birlikte gelir. Bu katman uygulamanızda gerçekleşecek istisnai hataları yada bir katman içerisinde gerçekleşebilecek özel hataları kontrol eder. Eğer bir katman içerisinden <kbd>$err = ""</kbd> değişkeni ile bir hata gönderilirse uygulama akışı kesilir ve katman hata çıktısı ile birlikte response nesnesine geri döner. Hata olmayan durumlarda ise bir sonraki $next() fonksiyonu çalışır ve uygulama normal akışına devam eder.
 
 
 ```php
@@ -14,11 +12,11 @@ return $next($request, $response, $err);
 
 #### Kurulum
 
-Aşağıdaki kaynaktan <b>Error.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
 ```php
 http://github.com/obullo/http-middlewares/
 ```
+
+Yukarıdaki kaynaktan <kbd>Error.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Katman Hataları
 
@@ -86,4 +84,4 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
 }
 ```
 
-İstisnai hataları ekrana dökmek için  <kbd>$exception->make($error)</kbd> metodu kullanılabilir.
+Yukarıdaki örnekte istisnai hataları ekrana dökmek için  <kbd>$exception->make($error)</kbd> metodu kullanılıyor.
