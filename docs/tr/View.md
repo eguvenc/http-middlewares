@@ -24,11 +24,11 @@ class View implements MiddlewareInterface, ControllerAwareInterface
 
 #### Kurulum
 
-Eğer katman mevcut değilse aşağıdaki kaynaktan <b>View.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
 ```php
 http://github.com/obullo/http-middlewares/
 ```
+
+Eğer katman mevcut değilse yuklarıdaki kaynaktan <b>View.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Konfigürasyon
 

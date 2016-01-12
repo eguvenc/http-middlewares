@@ -3,9 +3,18 @@
 
 > Uygulamaya gelen Http isteklerine göre metot türlerini filtrelemeyi sağlar. Belirlenen http metotları ( get, post, put, delete ) dışında bir istek gelirse isteği HTTP Error 405 Method not allowed sayfası ile engeller.
 
-### Konfigürasyon
+
+#### Konfigürasyon
 
 Framework çekirdeğinde çalışan bir katmandır herhangi bir kurulum ve konfigürasyon gerektirmez. Anotasyonlar ile birlikte kullanılabilmesi için <kbd>config/$env/config.php</kbd> dosyasından <b>annotations > enabled</b> anahtarının açık ( <b>true</b> ) olması gerekir.
+
+#### Kurulum
+
+```php
+http://github.com/obullo/http-middlewares/
+```
+
+Yukarıdaki kaynaktan <kbd>NotAllowed.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Çalıştırma
 
@@ -37,8 +46,6 @@ public function index()
 $c['router']->group(
     ['name' => 'GenericUsers','domain' => 'mydomain.com', 'middleware' => array()],
     function () {
-
-        $this->defaultPage('welcome');
 
         $this->match(['post', 'delete'], 'hello$', 'welcome/index');
     }

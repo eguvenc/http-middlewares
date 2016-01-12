@@ -18,11 +18,11 @@ $c['middleware']->add(
 
 #### Kurulum
 
-Aşağıdaki kaynaktan <b>ParsedBody.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
 ```php
 http://github.com/obullo/http-middlewares/
 ```
+
+Yukarıdaki kaynaktan <b>ParsedBody.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Çalıştırma
 

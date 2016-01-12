@@ -33,11 +33,11 @@ class TrustedIp implements MiddlewareInterface
 
 #### Kurulum
 
-Eğer katman mevcut değilse aşağıdaki kaynaktan <b>TrustedIp.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
 ```php
 http://github.com/obullo/http-middlewares/
 ```
+
+Eğer katman mevcut değilse yukarıdaki kaynaktan <b>TrustedIp.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Konfigürasyon
 

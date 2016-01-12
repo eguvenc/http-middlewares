@@ -4,26 +4,23 @@
 > Router katmanı route işlevleri gerçekleşmeden önceki aşamayı yönetir ve varsayılan olarak katmanlar içerisinde tanımlıdır.
 
 ```php
-class Router implements MiddlewareInterface, ContainerAwareInterface
+public function __invoke(Request $request, Response $response, callable $next = null)
 {
-    public function __invoke(Request $request, Response $response, callable $next = null)
-    {
-        if ($this->c['router']->getDefaultPage() == '') {
+    if ($this->c['router']->getDefaultPage() == '') {
 
-            $error = 'Unable to determine what should be displayed.';
-            $error.= 'A default route has not been specified in the router middleware.';
+        $error = 'Unable to determine what should be displayed.';
+        $error.= 'A default route has not been specified in the router middleware.';
 
-            $body = $this->c['template']->make('error', ['error' => $error]);
+        $body = $this->c['template']->make('error', ['error' => $error]);
 
-            return $response->withStatus(404)
-                ->withHeader('Content-Type', 'text/html')
-                ->withBody($body);
-        }
-        
-        $err = null;
-
-        return $next($request, $response, $err);
+        return $response->withStatus(404)
+            ->withHeader('Content-Type', 'text/html')
+            ->withBody($body);
     }
+    
+    $err = null;
+
+    return $next($request, $response, $err);
 }
 ```
 
@@ -39,13 +36,12 @@ $c['middleware']->add(
     ]
 );
 
-/* Location: .app/middlewares.php */
 ```
 
 #### Kurulum
 
-Eğer katman mevcut değilse aşağıdaki kaynaktan <b>Router.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
 ```php
 http://github.com/obullo/http-middlewares/
 ```
+
+Eğer katman mevcut değilse yukarıdaki kaynaktan <kbd>Router.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.

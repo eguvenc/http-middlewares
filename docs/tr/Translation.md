@@ -3,7 +3,7 @@
 
 > Uygulamaya gelen http isteklerinin tümü için <b>locale</b> anahtarlı çereze varsayılan yerel dili yada url den gönderilen dili kaydeder.
 
-### Konfigürasyon
+#### Konfigürasyon
 
 Uygulamanın tüm isteklerinde evrensel olarak çalışan bir katmandır. <kbd>app/middlewares.php</kbd> dosyası içerisinde tanımlanması gerekir.
 
@@ -70,22 +70,16 @@ return array(
 /* Location: ./config/translator.php */
 ```
 
-### Kurulum
+#### Kurulum
 
 ```php
-php task middleware add Translation
+http://github.com/obullo/http-middlewares/
 ```
 
-### Kaldırma
+Yukarıdaki kaynaktan <b>Router.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
-```php
-php task middleware remove Translation
-```
 
-Ayrıca <kbd>app/middlewares.php</kbd> dosyası içerisinden katmanı silin.
-Varsa <kbd>app/routes.php</kbd> dosyasından ilgili route ları kaldırın.
-
-### Çalıştırma
+#### Çalıştırma
 
 Yerel dilin doğru seçilebilmesi için herbir route grubunuza aşağıdaki gibi desktelenen dilleri içeren (?:en|tr|de) gibi bir yazım kuralı eklemeniz gerekir.
 

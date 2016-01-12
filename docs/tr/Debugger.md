@@ -3,7 +3,7 @@
 
 Çıktı görüntüleyici uygulama isteklerinden sonra oluşan ortam bileşenleri ve arka plan log verilerini görselleştirir. Debugger modülü aktifken uygulama ziyaret edildir ve uygulama çalışırken bir başka yeni pencerede <kbd>http://yourproject/debugger</kbd> adresine girilerek bu sayfada http, konsol, ajax log verileri ve ortam bilgileri ( http başlıkları, http gövdesi ) websocket bağlantısı ile dinamik olarak görüntülenir.
 
-### Konfigürasyon
+#### Konfigürasyon
 
 Çıktı görüntüleyicinin log dosyalarını okuyabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde aşağıdaki gibi herhangi bir önemlilik seviyesinde tanımlı olması gerekir.
 
@@ -16,7 +16,7 @@
 ]
 ```
 
-### Middleware
+#### Middleware
 
 ```php
 http://github.com/obullo/http-middlewares/

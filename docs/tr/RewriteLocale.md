@@ -6,16 +6,10 @@
 #### Kurulum
 
 ```php
-php task middleware add rewriteLocale
+http://github.com/obullo/http-middlewares/
 ```
 
-#### Kaldırma
-
-```php
-php task middleware remove rewriteLocale
-```
-
-Eğer route yapınızda bu katmanı kullandıysanız app/routes.php dosyasından ayrıca silin.
+Yukarıdaki kaynaktan <kbd>RewriteLocale.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Çalıştırma
 

@@ -22,6 +22,10 @@
             <td>Middleware for application boot.</td>
         </tr>
         <tr>
+            <td>FinalHandler/Zend</td>
+            <td>Middleware for application shutdown.</td>
+        </tr>
+        <tr>
             <td>Auth</td>
             <td>Middleware for authorized users.</td>
         </tr>
