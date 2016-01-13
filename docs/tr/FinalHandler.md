@@ -49,4 +49,4 @@ Zend middleware hakkında daha detaylı bilgi için <a href="https://github.com/
 
 #### Relay Katmanı Kurulumu
 
-Relay katmanı dökümentasyonu için <a href="https://github.com/obullo/relay-middleware" target="_blank">https://github.com/obullo/relay-middleware</a> adresini ziyaret edin.
+Relay katmanı kurulumu için <a href="https://github.com/obullo/relay-middleware" target="_blank">https://github.com/obullo/relay-middleware</a> adresini ziyaret edin.
