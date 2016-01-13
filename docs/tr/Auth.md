@@ -64,7 +64,7 @@ Yukarıdaki örnekte <b>modules/accounts</b> klasörü içerisindeki tüm sayfal
 
 ### Tekil Oturum Açma Özelliği
 
-Tekil oturum açma özelliği opsiyonel olarak kullanılır. Auth katmanı içerisinde bu özellik çağrıldığında birden fazla aygıtta yada birbirinden farklı tarayıcılarda oturum açıldığında açılan tüm önceki oturumlar sonlanır ve en son açılan oturum aktif kalır. Unique.session özelliği opsiyoneldir ve <kbd>service/user.php</kbd> konfigürasyon dosyasından kapatılıp açılabilir.
+Tekil oturum açma özelliği opsiyonel olarak kullanılır. Auth katmanı içerisinde bu özellik çağrıldığında birden fazla aygıtta yada birbirinden farklı tarayıcılarda oturum açıldığında açılan tüm önceki oturumlar sonlanır ve en son açılan oturum aktif kalır. Unique.session özelliği <kbd>service/user.php</kbd> konfigürasyon dosyasından kapatılıp açılabilir.
 
 ```php
 
