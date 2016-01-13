@@ -61,4 +61,4 @@ $c['middleware']->add(
 http://github.com/obullo/http-middlewares/
 ```
 
-Eğer katman mevcut değilse yukarıdaki kaynaktan <b>TrustedIp.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
+Eğer katman mevcut değilse yukarıdaki kaynaktan <kbd>TrustedIp.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
