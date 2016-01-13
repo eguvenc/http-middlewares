@@ -18,7 +18,7 @@ Debugger modülü aktifken uygulama ziyaret edilir ve uygulama çalışırken bi
 ]
 ```
 
-#### Middleware
+#### Kurulum
 
 ```php
 http://github.com/obullo/http-middlewares/
