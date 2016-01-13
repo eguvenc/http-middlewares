@@ -10,7 +10,7 @@ Final handler yani sonlandırıcı katman http katmanlarının sonuncusu olarak 
 * <kbd>TerminableInterface</kbd> arayüzünü kullanan katmanların <kbd>terminate()</kbd> metodunu çalıştırmak
 * Hataları yakalamak ve çevre ortamına göre farklı davranışlar sergilemek
 
-Şu anki sürümde 2 adet katman sağlayıcı destekleniyor. Bunlar aşağıda listelenmiştir.
+Obullo içerisinde şu anki sürümde 2 adet katman sağlayıcı destekleniyor. Bunlar aşağıda listelenmiştir.
 
 * Zend Stratigility ( Default )
 * <a href="https://github.com/obullo/relay-middleware" target="_blank">Relay</a> ( Optional )
