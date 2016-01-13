@@ -1,74 +1,34 @@
 
 ## Translation Katmanı
 
-> Uygulamaya gelen http isteklerinin tümü için <b>locale</b> anahtarlı çereze varsayılan yerel dili yada url den gönderilen dili kaydeder.
+Uygulamaya gelen http isteklerinin tümü için <b>locale</b> anahtarlı çereze varsayılan yerel dili yada url den gönderilen dili kaydeder.
 
 #### Konfigürasyon
 
-Uygulamanın tüm isteklerinde evrensel olarak çalışan bir katmandır. <kbd>app/middlewares.php</kbd> dosyası içerisinde tanımlanması gerekir.
-
-> **Not:** Http katmanlarında önemlilik sırası en yüksek olan katman en son tanımlanan katmandır.
+Uygulamanın tüm isteklerinde evrensel olarak çalışan bir katmandır ve <kbd>app/middlewares.php</kbd> dosyası içerisinde tanımlanması gerekir. Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine katmanı aşağıdaki gibi tanımlayın.
 
 ```php
-/*
-|--------------------------------------------------------------------------
-| Translations
-|--------------------------------------------------------------------------
-*/
-$c['app']->middleware(new Http\Middlewares\Translation);
-
-/*
-|--------------------------------------------------------------------------
-| Request
-|--------------------------------------------------------------------------
-*/
-$c['app']->middleware(new Http\Middlewares\Request);
-
-
-/* Location: .app/middlewares.php */
+$c['middleware']->register(
+    [
+        'Translation' => 'Http\Middlewares\Translation',
+    ]
+);
 ```
 
-Ayrıca translation paketinin konfigürasyon dosyası <kbd>config/translator.php</kbd> dosyasını konfigüre etmeyi unutmayın.
+Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
-return array(
-
-    'locale' => [
-        'default'  => 'en',
-    ],
-
-    'fallback' => [
-        'enabled' => false,
-        'locale' => 'es',
-    ],
-
-    'uri' => [
-        'segment'       => true, // Uri segment number e.g. http://example.com/en/home
-        'segmentNumber' => 0       
-    ],
-
-    'cookie' => [
-        'name'   =>'locale',               // Translation value cookie name
-        'domain' => '',                    // Set to .your-domain.com for site-wide cookies
-        'expire' => (365 * 24 * 60 * 60),  // 365 day
-        'secure' => false,                 // Cookie will only be set if a secure HTTPS connection exists.
-        'httpOnly' => false,               // When true the cookie will be made accessible only 
-        'path' => '/',                     // through the HTTP protocol
-    ],
-
-    'languages' => [
-                        'en' => 'english', // Available Languages
-                        'de' => 'deutsch',
-                        'es' => 'spanish',
-                        'tr' => 'turkish',
-                        'fr' => 'french',
-                    ],
-
-    'debug' => false,
-
-
-/* Location: ./config/translator.php */
+$c['middleware']->add(
+    [
+        // 'Maintenance',
+        // 'TrustedIp',
+        'Translation',
+        'View',
+    ]
+);
 ```
+
+Ayrıca translation paketinin konfigürasyon dosyası <kbd>translator.php</kbd> dosyasını konfigüre etmeyi unutmayın.
 
 #### Kurulum
 
@@ -76,28 +36,24 @@ return array(
 http://github.com/obullo/http-middlewares/
 ```
 
-Yukarıdaki kaynaktan <b>Router.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
+Yukarıdaki kaynaktan <kbd>Translation.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Çalıştırma
 
-Yerel dilin doğru seçilebilmesi için herbir route grubunuza aşağıdaki gibi desktelenen dilleri içeren (?:en|tr|de) gibi bir yazım kuralı eklemeniz gerekir.
+Uygulamanızı <kbd>http://myproject/en/welcome</kbd> gibi ziyaret ettiğinizde yerel dil <b>locale</b> adlı çereze <b>en</b> olarak kaydedilecektir. Artık geçerli yerel dili <kbd>$this->translator->getLocale()</kbd> fonksiyonu ile çağırabilirsiniz.
+
+#### Url Adresi Dil Desteği
+
+Eğer uygulamanızın <kbd>http://example.com/en/welcome/index</kbd> gibi bir dil desteği ile çalışmasını istiyorsanız aşağıdaki route kurallarını <kbd>app/routes.php</kbd> dosyası içerisine tanımlamanız gerekir.
 
 ```php
-$c['router']->group(
-    [
-        'name' => 'Locale',
-        'domain' => 'mydomain.com',
-        'middleware' => array()
-    ],
-    function () {
-
-        $this->defaultPage('welcome');
-
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1');  // For dynamic url requests http://example.com/en/welcome
-        $this->get('(?:en|tr|de|nl)', 'welcome');  // For default page request http://example.com/en
-    }
-);
+$c['router']->get('(?:en|es|de)/(.*)', '$1');
+$c['router']->get('(?:en|es|de)', 'welcome');
 ```
 
-Uygulamanızı <kbd>http://myproject/en/welcome</kbd> gibi ziyaret ettiğinizde yerel dil <b>locale</b> adlı çereze <b>en</b> olarak kaydedilecektir. Artık geçerli yerel dili <kbd>$this->c['translator']->getLocale()</kbd> fonksiyonu ile çağırabilirsiniz.
+* İlk kural dil segmentinden sonra kontrolör, metot ve parametre çalıştırmayı sağlar. ( örn. http://example.com/en/examples )
+* İkinci kural ise varsayılan açılış sayfası içindir. ( örn. http://example.com/en/ )
+
+> **Not:** Uygulamanızın desteklediği dilleri düzenli ifadelerdeki parentez içlerine girmeniz gerekir. Yukarıda en,es ve de dilleri örnek gösterilmiştir.
+
+Eğer uygulamanızın bütününe değilde sadece belirli url adreslerinize dil desteği eklemek istiyorsanız [RewriteLocale](RewriteLocale.md) katmanını inceleyin.

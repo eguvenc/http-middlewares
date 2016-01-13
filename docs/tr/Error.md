@@ -10,6 +10,10 @@ $err = 'example error !';
 return $next($request, $response, $err);
 ```
 
+#### Konfigürasyon 
+
+Error katmanının <kbd>app/middlewares.php</kbd> içerisine eklenmesi gerekmez uygulama tarafından katmanlar içerisine kendiliğinden dahil edilir. 
+
 #### Kurulum
 
 ```php

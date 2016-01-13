@@ -1,7 +1,7 @@
 
 ## Router Katmanı
 
-> Router katmanı route işlevleri gerçekleşmeden önceki aşamayı yönetir ve varsayılan olarak katmanlar içerisinde tanımlıdır.
+Router katmanı route işlevleri gerçekleşmeden önceki aşamayı yönetir ve varsayılan olarak katmanlar içerisinde tanımlıdır.
 
 ```php
 public function __invoke(Request $request, Response $response, callable $next = null)
@@ -26,7 +26,7 @@ public function __invoke(Request $request, Response $response, callable $next = 
 
 #### Konfigürasyon
 
-Router katmanı varsayılan olarak tanımlıdır.
+Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
 $c['middleware']->add(

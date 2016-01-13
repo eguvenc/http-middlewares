@@ -1,12 +1,27 @@
 
 ## NotAllowed Katmanı
 
-> Uygulamaya gelen Http isteklerine göre metot türlerini filtrelemeyi sağlar. Belirlenen http metotları ( get, post, put, delete ) dışında bir istek gelirse isteği HTTP Error 405 Method not allowed sayfası ile engeller.
-
+Uygulamaya gelen Http isteklerine göre metot türlerini filtrelemeyi sağlar. Eğer belirlenen http metotları ( get, post, put, delete ) dışında bir istek gelirse istek, <kbd>405 Method Not Allowed</kbd> sayfası ile engellenir.
 
 #### Konfigürasyon
 
-Framework çekirdeğinde çalışan bir katmandır herhangi bir kurulum ve konfigürasyon gerektirmez. Anotasyonlar ile birlikte kullanılabilmesi için <kbd>config/$env/config.php</kbd> dosyasından <b>annotations > enabled</b> anahtarının açık ( <b>true</b> ) olması gerekir.
+Framework çekirdeğinde çalışan bir katmandır. Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine NotAllowed katmanını tanımlayın.
+
+```php
+$c['middleware']->register(
+    [
+        'NotAllowed' => 'Http\Middlewares\NotAllowed',
+    ]
+);
+```
+
+Anotasyon özelliğinin kullanabilmesi için anotasyonların <kbd>app/$env/config.php</kbd> dosyasından aşağıdaki gibi açık olması gerekir.
+
+```php
+'extra' => [
+    'annotations' => true,
+],
+```
 
 #### Kurulum
 
@@ -18,9 +33,7 @@ Yukarıdaki kaynaktan <kbd>NotAllowed.php</kbd> dosyasını uygulamanızın <kbd
 
 #### Çalıştırma
 
-Anotasyonlar ile controller sınıfı içerisinden veya route yapısı içerisinden çalıştırılabilir.
-
-#### Anotasyonlar ile kontrolör sınıfı içerisinden çalıştırma
+NotAllowed katmanı anotasyonlar yardımı ile aşağıdaki gibi controller sınıfı içerisinden
 
 ```php
 /**
@@ -34,22 +47,26 @@ public function index()
 {
     // ..
 }
-
-/* Location: .modules/welcome/controller/welcome.php */
 ```
 
-<kbd>http://project/hello</kbd> sayfasına post ve delete haricinde örneğin bir get isteği geldiğinde bu istek engellenecektir.
-
-#### Route yapısı içerisinden çalıştırma
+çalıştırılabilir. Eğer index metoduna get veya post haricinde bir istek türü gelirse <kbd>GET Method Not Allowed</kbd> hatası almanız gerekir. NotAllowed katmanı aşağıdaki gibi bir route kuralı içerisinden de çalıştırılabilir.
 
 ```php
 $c['router']->group(
-    ['name' => 'GenericUsers','domain' => 'mydomain.com', 'middleware' => array()],
+    [
+    	'middleware' => array()
+    ],
     function () {
 
-        $this->match(['post', 'delete'], 'hello$', 'welcome/index');
+        $this->match(['post', 'put'], 'welcome');
     }
 );
 ```
 
-Yukarıdaki örnekte <kbd>/hello</kbd> adresine yalnızca <b>POST</b> ve <b>DELETE</b> http istek yöntemleriyle erişilebilir. Uygulamanızda <b>/hello</b> adresini ziyaret ettiğinizde bir <kbd>HTTP Error 405 Method Not Allowed</kbd> hatası almamız gerekir.
+Yukarıdaki örnekte <kbd>/welcome</kbd> adresine yalnızca <kbd>POST</kbd> ve <kbd>DELETE</kbd> istekleriyle erişilebilir. 
+
+```php
+http://example.com/welcome
+```
+
+Uygulamanızı yukarıdaki gibi bir GET isteği ile ziyaret ettiğinizde bir <kbd>GET Method Not Allowed</kbd> hatası almanız gerekir.

@@ -1,17 +1,8 @@
 
 ### Guest Katmanı
 
-> Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşturur. Bu katman auth paketini çağırarak kullanıcının sisteme yetkisi olup olmadığını kontrol eder ve yetkisi olmayan kullanıcıları sistem dışına yönlendirir. Route yapısında Auth katmanı ile birlikte kullanılır.
+Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşturur. Bu katman auth paketini çağırarak kullanıcının sisteme yetkisi olup olmadığını kontrol eder ve yetkisi olmayan kullanıcıları sistem dışına yönlendirir. Route yapısında Auth katmanı ile birlikte kullanılması önerilir.
 <a name="auth-configuration"></a>
-
-#### Kurulum
-
-```php
-http://github.com/obullo/http-middlewares/
-```
-
-Yukarıdaki kaynaktan <kbd>Guest.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
 
 #### Konfigürasyon
 
@@ -20,28 +11,47 @@ Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Gues
 ```php
 $c['middleware']->register(
     [
-        .
-        .
-        'Auth' => 'Http\Middlewares\Auth',
         'Guest' => 'Http\Middlewares\Guest',
     ]
 );
 ```
 
-Guest katmanına bir örnek.
-
+#### Kurulum
 
 ```php
-public function __invoke(Request $request, Response $response, callable $next = null)
-{
-    if ($this->user->identity->guest()) {
+http://github.com/obullo/http-middlewares/
+```
 
-        $this->c['flash']->info('Your session has been expired.');
+Yukarıdaki kaynaktan <kbd>Guest.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın. 
 
-        return $response->redirect('/examples/membership/login/index');
+#### Çalıştırma
+
+Katmanın çalışması için route yapısına tutturulması gerekir.
+
+```php
+$c['router']->group(
+    [
+        'name' => 'AuthorizedUsers',
+        'middleware' => array('Guest')
+    ],
+    function () {
+
+        $this->attach('membership/restricted');
     }
-    $err = null;
+);
+```
+Eğer bu katmanı bir modül için kullanmak istiyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
 
-    return $next($request, $response, $err);
-}
+```php
+$c['router']->group(
+    [
+        'name' => 'UnAuthorizedUsers',
+        'domain' => 'mydomain.com', 
+        'middleware' => array('Guest')
+    ],
+    function () {
+
+        $this->attach('accounts/.*');
+    }
+);
 ```

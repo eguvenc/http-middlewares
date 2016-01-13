@@ -5,14 +5,12 @@
 
 #### Konfigürasyon
 
-Çıktı görüntüleyicinin log dosyalarını okuyabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde aşağıdaki gibi herhangi bir önemlilik seviyesinde tanımlı olması gerekir.
+Çıktı görüntüleyicinin <kbd>app/middlewares.php</kbd> içerisine eklenmesi gerekmez uygulama tarafından katmanlar içerisine kendiliğinden dahil edilir. Fakat çıktı görüntüleyicinin log dosyalarını okuyabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde aşağıdaki gibi herhangi bir önemlilik seviyesinde tanımlı olması gerekir.
 
 ```php
 'methods' => [
     ['registerFilter' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
     ['registerHandler' => [5, 'file']],
-    .
-    .
 ]
 ```
 

@@ -1,26 +1,7 @@
 
 ## View Katmanı
 
-> Layer paketini kullanarak view şablonları oluşturmayı sağlar.
-
-```php
-class View implements MiddlewareInterface, ControllerAwareInterface
-{
-    public function setController(Controller $controller)
-    {
-        if (method_exists($controller, '__invoke')) {  // Assign layout variables
-            $controller();
-        }
-    }
-
-    public function __invoke(Request $request, Response $response, callable $next = null)
-    {
-        $err = null;
-
-        return $next($request, $response, $err);
-    }
-}
-```
+Layer paketini kullanarak view şablonları oluşturmayı sağlar.
 
 #### Kurulum
 
@@ -28,9 +9,19 @@ class View implements MiddlewareInterface, ControllerAwareInterface
 http://github.com/obullo/http-middlewares/
 ```
 
-Eğer katman mevcut değilse yuklarıdaki kaynaktan <b>View.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
+Eğer katman mevcut değilse yuklarıdaki kaynaktan <kbd>View.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Konfigürasyon
+
+Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine katmanı aşağıdaki gibi tanımlayın.
+
+```php
+$c['middleware']->register(
+    [
+        'View' => 'Http\Middlewares\View',
+    ]
+);
+```
 
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
@@ -41,8 +32,6 @@ $c['middleware']->add(
         'View',
     ]
 );
-
-/* Location: .app/middlewares.php */
 ```
 
 #### Çalıştırma

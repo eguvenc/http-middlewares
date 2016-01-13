@@ -1,7 +1,7 @@
 
 ## TrustedIp Katmanı
 
-> Eğer sunucunuz ters bir proxy sunucu arkasında ise kullanıcının gerçek ip adresini belirleyebilmek için proxy ip adreslerinin temiz listesine eklenerek ayrıştırılması gerekir. Aksi durumda <kbd>$this->request->getIpAddress()</kbd> metodu proxy sunucu adresine dönecektir. TrustedIp katmanı çalıştırılırsa liste içerisindeki ip adresleri dikkate alınmayarak <kbd>$this->request->getIpAddress()</kbd> metodu kullanıcının gerçek ip adresine döner.
+Eğer sunucunuz ters bir proxy sunucu arkasında ise kullanıcının gerçek ip adresini belirleyebilmek için proxy ip adreslerinin temiz listesine eklenerek ayrıştırılması gerekir. Aksi durumda <kbd>$this->request->getIpAddress()</kbd> metodu proxy sunucu adresine dönecektir. TrustedIp katmanı çalıştırılırsa liste içerisindeki ip adresleri dikkate alınmayarak <kbd>$this->request->getIpAddress()</kbd> metodu kullanıcının gerçek ip adresine döner.
 
 ```php
 class TrustedIp implements MiddlewareInterface
@@ -31,15 +31,17 @@ class TrustedIp implements MiddlewareInterface
 }
 ```
 
-#### Kurulum
+#### Konfigürasyon
+
+Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine katmanı aşağıdaki gibi tanımlayın.
 
 ```php
-http://github.com/obullo/http-middlewares/
+$c['middleware']->register(
+    [
+        'TrustedIp' => 'Http\Middlewares\TrustedIp',
+    ]
+);
 ```
-
-Eğer katman mevcut değilse yukarıdaki kaynaktan <b>TrustedIp.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
-
-#### Konfigürasyon
 
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
@@ -51,6 +53,12 @@ $c['middleware']->add(
         // 'View',
     ]
 );
-
-/* Location: .app/middlewares.php */
 ```
+
+#### Kurulum
+
+```php
+http://github.com/obullo/http-middlewares/
+```
+
+Eğer katman mevcut değilse yukarıdaki kaynaktan <b>TrustedIp.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.

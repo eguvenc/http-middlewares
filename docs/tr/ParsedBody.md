@@ -1,11 +1,21 @@
 
 ## ParsedBody Katmanı
 
-> Uygulamaya belirli türlerde gönderilen Http isteği gövdelerini çözümler. Gönderilen istek gövdeleri genellikle json veya xml biçimleridir.
+Uygulamaya belirli türlerde gönderilen Http isteği gövdelerini çözümler. Gönderilen istek gövdeleri genellikle <kbd>json</kbd> veya <kbd>xml</kbd> biçimleridir.
 
 #### Konfigürasyon
 
-ParsedBody katmanını katmanlar içerisine ekleyin.
+Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine ParsedBody katmanını tanımlayın.
+
+```php
+$c['middleware']->register(
+    [
+        'ParsedBody' => 'Http\Middlewares\ParsedBody',
+    ]
+);
+```
+
+Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
 $c['middleware']->add(
@@ -22,7 +32,7 @@ $c['middleware']->add(
 http://github.com/obullo/http-middlewares/
 ```
 
-Yukarıdaki kaynaktan <b>ParsedBody.php</b> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
+Yukarıdaki kaynaktan <kbd>ParsedBody.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Çalıştırma
 
@@ -71,8 +81,6 @@ class Welcome extends Controller
     public function index()
     {
     	echo print_r($this->request->getParsedBody(), true);
-
-        // $this->view->load('welcome');
     }
 }
 ```
@@ -112,7 +120,7 @@ Curl dosyanızı çalıştırın.
 http://localhost/curl.php
 ```
 
-Beklenen Çıktı
+Herşey yolundaysa beklenen çıktı aşağıdaki gibi olmalıdır.
 
 ```php
 string(129) "Array ( [id] => Array ( [0] => 2 ) [title] => A new post [content] => Example content ) " 

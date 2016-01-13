@@ -3,14 +3,13 @@
 
 Auth katmanları uygulamanız içerisinde <kbd>app/classes/Http/Middlewares/</kbd> klasörü altında bulunan <b>Auth.php</b> ve <b>Guest.php</b> dosyalarıdır. Auth katmanı uygulamaya giriş yapmış olan kullanıcıları kontrol ederken Guest katmanı ise uygulamaya giriş yetkisi olmayan kullanıcıları kontrol eder. Auth ve Guest katmanlarının çalışabilmesi için route yapınızda middleware anahtarına ilgili modül için birkez tutturulmaları gerekir.
 
-### Auth Katmanı
+#### Auth Katmanı
 
-> Başarılı oturum açmış ( yetkinlendirilmiş ) kullanıcılara ait katmandır. 
+Başarılı oturum açmış ( yetkinlendirilmiş ) kullanıcılara ait katmandır. 
 
+#### Guest Katmanı
 
-### Guest Katmanı
-
-> Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşturur. Bu katman auth paketini çağırarak kullanıcının sisteme yetkisi olup olmadığını kontrol eder ve yetkisi olmayan kullanıcıları sistem dışına yönlendirir. Route yapısında Auth katmanı ile birlikte kullanılır.
+Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşturur. Bu katman auth paketini çağırarak kullanıcının sisteme yetkisi olup olmadığını kontrol eder ve yetkisi olmayan kullanıcıları sistem dışına yönlendirir. Route yapısında Auth katmanı ile birlikte kullanılır.
 
 <a name="auth-configuration"></a>
 
@@ -21,8 +20,6 @@ Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Auth
 ```php
 $c['middleware']->register(
     [
-        .
-        .
         'Auth' => 'Http\Middlewares\Auth',
         'Guest' => 'Http\Middlewares\Guest',
     ]

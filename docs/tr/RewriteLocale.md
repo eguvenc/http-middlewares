@@ -1,7 +1,19 @@
 
 ## RewriteLocale Katmanı
 
-> Bu katman uygulamaya <b>http://example.com/welcome</b> olarak gelen istekleri mevcut yerel dili ekleyerek <b>http://example.com/en/welcome</b> adresine yönlendirir.
+Bu katman uygulamaya <b>http://example.com/welcome</b> olarak gelen istekleri mevcut yerel dili ekleyerek <b>http://example.com/en/welcome</b> adresine yönlendirir.
+
+#### Konfigürasyon
+
+Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine bu katmanını tanımlayın.
+
+```php
+$c['middleware']->register(
+    [
+        'RewriteLocale' => 'Http\Middlewares\RewriteLocale',
+    ]
+);
+```
 
 #### Kurulum
 
@@ -22,9 +34,7 @@ $c['router']->group(
         'domain' => 'mydomain.com', 
         'middleware' => array('RewriteLocale')
     ],
-    function () use ($c) {
-
-        $this->defaultPage('welcome');
+    function () {
 
         $this->get('(?:en|tr|de|nl)/(.*)', '$1');
         $this->get('(?:en|tr|de|nl)', 'welcome');
@@ -45,12 +55,10 @@ $c['router']->group(
     ],
     function () {
 
-        $this->defaultPage('welcome');
+        $this->get('(?:en|tr|de|nl)/(.*)', '$1');
+        $this->get('(?:en|tr|de|nl)', 'welcome/index');
 
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1');           // Dispatch request for http://example.com/en/folder/class
-        $this->get('(?:en|tr|de|nl)', 'welcome/index');     // if request http://example.com/en  -> redirect it to default controller
-
-        $this->attach('/');         // Run middlewares for below the urls
+        $this->attach('/');
         $this->attach('welcome');
         $this->attach('sports/.*');
         $this->attach('support/.*');
