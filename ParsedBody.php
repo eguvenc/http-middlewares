@@ -75,3 +75,4 @@ class ParsedBody implements MiddlewareInterface
         return $result ? $result[0] : null;
     }
 }
+

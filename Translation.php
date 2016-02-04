@@ -6,42 +6,20 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Config\ConfigInterface as Config;
-use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
-use Obullo\Container\ContainerInterface as Container;
 use Obullo\Translation\TranslatorInterface as Translator;
 
-class Translation implements MiddlewareInterface, ContainerAwareInterface
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
+
+class Translation implements MiddlewareInterface, ImmutableContainerAwareInterface
 {
-    protected $c;
-    protected $config;
+    use ImmutableContainerAwareTrait;
+
+    protected $params;
     protected $request;
     protected $translator;
     protected $cookieValue;
-
-    /**
-     * Constructor
-     * 
-     * @param Config     $config     config
-     * @param Translator $translator translator
-     */
-    public function __construct(Config $config, Translator $translator)
-    {
-        $this->config = $config->load('translator');
-        $this->translator = $translator;
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
 
     /**
      * Invoke middleware
@@ -55,9 +33,12 @@ class Translation implements MiddlewareInterface, ContainerAwareInterface
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $this->request = $request;
+        $this->translator = $this->getContainer()->get('translator');
+        $this->params = $this->getContainer()->get('translator.params');
+
         $this->cookieValue = $this->readCookie();
         $this->setLocale();
-        $this->setFallback();
+        // $this->setFallback();
 
         return $next($request, $response);
     }
@@ -69,7 +50,7 @@ class Translation implements MiddlewareInterface, ContainerAwareInterface
      */
     protected function readCookie()
     {
-        $name = $this->config['cookie']['name'];
+        $name = $this->params['cookie']['name'];
         $cookies = $this->request->getCookieParams();
 
         return isset($cookies[$name]) ? $cookies[$name] : null;
@@ -119,12 +100,13 @@ class Translation implements MiddlewareInterface, ContainerAwareInterface
      */
     protected function setByUri()
     {
-        if ($this->config['uri']['segment']) {
+        if ($this->params['uri']['enabled']) {
 
-            $segment = $this->request->getUri()->segment($this->config['uri']['segmentNumber']);  // Set via URI Segment
+            $segment = $this->request->getUri()->segment($this->params['uri']['segment']);  // Set via URI Segment
 
-            if (! empty($segment)) {
+            if (! empty($segment) && in_array($segment, $this->params['default']['languages'])) {
                 $bool = ($this->cookieValue == $segment) ? false : true; // Do not write if cookie == segment value same
+
                 if ($this->translator->setLocale($segment, $bool)) {
                     return true;
                 }
@@ -157,7 +139,11 @@ class Translation implements MiddlewareInterface, ContainerAwareInterface
         $intl = extension_loaded('intl');     // Intl extension should be enabled.
 
         if ($intl == false) {
-            $this->c['logger']->notice('Install php intl extension to enable detecting browser language feature.');
+
+            $this->getContainer()
+                ->get('logger')
+                ->notice('Install php intl extension to enable detecting browser language feature.');
+
             return false;
         }
         $server = $this->request->getServerParams();

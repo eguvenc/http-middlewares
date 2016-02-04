@@ -8,37 +8,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Authentication\Middleware\UniqueSessionTrait;
 
-use Obullo\Container\ContainerAwareInterface;
-use Obullo\Container\ContainerInterface as Container;
-use Obullo\Authentication\User\UserInterface as User;
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
 
-class Auth implements MiddlewareInterface, ContainerAwareInterface
+class Auth implements MiddlewareInterface, ImmutableContainerAwareInterface
 {
-    use UniqueSessionTrait;
-
-    protected $user;
-
-    /**
-     * Constructor
-     * 
-     * @param User $user auth user controller
-     */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
+    use ImmutableContainerAwareTrait, UniqueSessionTrait;
 
     /**
      * Invoke middleware
@@ -51,7 +26,7 @@ class Auth implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        if ($this->user->identity->check()) {
+        if ($this->getContainer()->get('user')->identity->check()) {
     
             $this->killSessions();  // Terminate multiple logins
 
