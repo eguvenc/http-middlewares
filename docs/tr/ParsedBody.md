@@ -8,7 +8,7 @@ Uygulamaya belirli türlerde gönderilen Http isteği gövdelerini çözümler. 
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine ParsedBody katmanını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'ParsedBody' => 'Http\Middlewares\ParsedBody',
     ]
@@ -18,7 +18,7 @@ $c['middleware']->register(
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$c['middleware']->add(
+$middleware->add(
     [
         'ParsedBody',
         'Router',

@@ -8,7 +8,7 @@ Uygulamanızda güvenli protokol ile başlaması gereken <b>http://</b> istekler
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Https katmanını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'Https' => 'Http\Middlewares\Https',
     ]
@@ -28,13 +28,13 @@ Yukarıdaki kaynaktan <kbd>Https.php</kbd> dosyasını uygulamanızın <kbd>app/
 Aşağıdaki örnekde <kbd>http://examples.com/hello</kbd> adresi için tanımlı bir route kuralı gösteriliyor.
 
 ```php
-$c['router']->get('hello/*', 'welcome/index')->middleware('Https');
+$router->get('hello/*', 'welcome/index')->middleware('Https');
 ```
 
 Eğer uygulamanıza <kbd>http://examples.com/hello</kbd> isteği gelirse, istek güvenli adrese yani <kbd>https://examples.com/hello</kbd> adresine yönlendirilir. Eğer birden fazla güvenli adresiniz varsa onları aşağıdaki gibi bir grup içinde tanımlamak daha doğru olacaktır.
 
 ```php
-$c['router']->group(
+$router->group(
     [
     	'name' => 'Secure',
     	'domain' => 'mydomain.com',

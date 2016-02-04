@@ -1,14 +1,14 @@
 
 ## Translation Katmanı
 
-Uygulamaya gelen http isteklerinin tümü için <b>locale</b> anahtarlı çereze varsayılan yerel dili yada url den gönderilen dili kaydeder.
+Uygulamaya gelen http isteklerinin tümü için <kbd>locale</kbd> anahtarlı çereze varsayılan yerel dili yada url den gönderilen dili kaydeder.
 
 #### Konfigürasyon
 
 Uygulamanın tüm isteklerinde evrensel olarak çalışan bir katmandır ve <kbd>app/middlewares.php</kbd> dosyası içerisinde tanımlanması gerekir. Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine katmanı aşağıdaki gibi tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'Translation' => 'Http\Middlewares\Translation',
     ]
@@ -18,7 +18,7 @@ $c['middleware']->register(
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$c['middleware']->add(
+$middleware->add(
     [
         // 'Maintenance',
         // 'TrustedIp',
@@ -28,7 +28,7 @@ $c['middleware']->add(
 );
 ```
 
-Ayrıca translation paketinin konfigürasyon dosyası <kbd>translator.php</kbd> dosyasını konfigüre etmeyi unutmayın.
+Ayrıca translation paketinin konfigürasyon dosyası <kbd>providers/translator.php</kbd> dosyasını konfigüre etmeyi unutmayın.
 
 #### Kurulum
 
@@ -40,20 +40,23 @@ Yukarıdaki kaynaktan <kbd>Translation.php</kbd> dosyasını uygulamanızın <kb
 
 #### Çalıştırma
 
-Uygulamanızı <kbd>http://myproject/en/welcome</kbd> gibi ziyaret ettiğinizde yerel dil <b>locale</b> adlı çereze <b>en</b> olarak kaydedilecektir. Artık geçerli yerel dili <kbd>$this->translator->getLocale()</kbd> fonksiyonu ile çağırabilirsiniz.
+Uygulamanızı <kbd>http://myproject/en/welcome</kbd> gibi ziyaret ettiğinizde yerel dil <kbd>locale</kbd> adlı çereze <kbd>en</kbd> olarak kaydedilecektir. Artık geçerli yerel dili <kbd>$this->translator->getLocale()</kbd> fonksiyonu ile çağırabilirsiniz.
 
 #### Url Adresi Dil Desteği
 
 Eğer uygulamanızın <kbd>http://example.com/en/welcome/index</kbd> gibi bir dil desteği ile çalışmasını istiyorsanız aşağıdaki route kurallarını <kbd>app/routes.php</kbd> dosyası içerisine tanımlamanız gerekir.
 
 ```php
-$c['router']->get('(?:en|es|de)/(.*)', '$1');
-$c['router']->get('(?:en|es|de)', 'welcome');
+$router->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+$router->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+$router->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 ```
 
-* İlk kural dil segmentinden sonra kontrolör, metot ve parametre çalıştırmayı sağlar. ( örn. http://example.com/en/examples )
-* İkinci kural ise varsayılan açılış sayfası içindir. ( örn. http://example.com/en/ )
+Uygulamanızın desteklediği dilleri düzenli ifadelerdeki parentez içlerine girmeniz gerekir. Yukarıda en,es ve de dilleri örnek gösterilmiştir.
 
-> **Not:** Uygulamanızın desteklediği dilleri düzenli ifadelerdeki parentez içlerine girmeniz gerekir. Yukarıda en,es ve de dilleri örnek gösterilmiştir.
+Route kurallarının anlamı,
+
+* İlk iki kural varsayılan açılış sayfası içindir. ( örn. http://example.com/en/ )
+* Son kural ise dil segmentinden sonra kontrolör, metot ve parametre çalıştırmayı sağlar. ( örn. http://example.com/en/examples )
 
 Eğer uygulamanızın bütününe değilde sadece belirli url adreslerinize dil desteği eklemek istiyorsanız [RewriteLocale](RewriteLocale.md) katmanını inceleyin.

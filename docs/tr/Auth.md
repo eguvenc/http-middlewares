@@ -10,18 +10,25 @@ Başarılı oturum açmış ( yetkinlendirilmiş ) kullanıcılara ait katmandı
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Auth ve Guest katmanlarını tanımlayın.
 
 ```php
-$middleware->add(
+$middleware->register(
     [
-        'Auth',
-        'Guest'
+        'Auth' => 'Http\Middlewares\Auth',
+        'Guest' => 'Http\Middlewares\Guest',
     ]
 );
 ```
 
+#### Kurulum
+
+```php
+http://github.com/obullo/http-middlewares/
+```
+
+Yukarıdaki kaynaktan <kbd>Auth.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın. 
+
 ### Çalıştırma
 
-Uygulamanıza giriş yapmış kullanıcılara ait bir katman oluşması için belirli bir route grubu yaratıp Auth katmanını <kbd>app/routes.php</kbd> içerisine aşağıdaki gibi eklemeniz gerekir.
-Son olarak route grubu içerisinde <b>$this->attach()</b> metodunu kullanarak yetkili kullanıcılara ait sayfayı yada sayfaları belirleyin.
+Uygulamanıza giriş yapmış kullanıcılara ait bir katman oluşması için belirli bir route grubu yaratıp Auth katmanını <kbd>app/routes.php</kbd> içerisine aşağıdaki gibi ekleyin. Route grubu içerisinde <b>$this->attach()</b> metodunu kullanarak yetkili kullanıcılara ait sayfayı yada sayfaları belirleyin.
 
 ```php
 $router->group(

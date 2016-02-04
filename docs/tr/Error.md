@@ -59,8 +59,10 @@ class Welcome extends Controller
 Error katmanından sadece uygulama içerisindeki istisnai hatalar ve <kbd>$err</kbd> değişkeni ile gönderilen hatalar kontrol edilebilir. Uygulama evrensel hataları ise <kbd>app/errors.php</kbd> dosyasından yönetilir. Error katmanı içerisinden <kbd>$this->c['app']->exceptionError();</kbd> metodu kullanılarak istisnai hatalar <kbd>app/errors.php</kbd> dosyasına yönlendirilmiş olur.
 
 ```php
-class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
+class Error implements ErrorMiddlewareInterface, ImmutableContainerAwareInterface
 {
+    use ImmutableContainerAwareTrait;
+
     public function __invoke($error, Request $request, Response $response, callable $out = null)
     {
         if (is_string($error)) {
@@ -69,22 +71,20 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
         }
         if (is_object($error)) {
             
-            if ($this->c['app']->env() == 'local') {
+            if ($this->getContainer()->get('app')->getEnv() == 'local') {
 
                 $exception = new \Obullo\Error\Exception;
                 echo $exception->make($error);
 
-                $this->c['app']->exceptionError($error);  // Forward exceptions to app/errors.php
+                $this->getContainer()->get('app')->exceptionError($error);  // Log exceptions using app/errors.php
 
             } else {
             
                 echo $error->getMessage();
 
-                $this->c['app']->exceptionError($error);
+                $this->getContainer()->get('app')->exceptionError($error);  // Log exceptions using app/errors.php
             }
         }
-        return $response;
-    }
 }
 ```
 

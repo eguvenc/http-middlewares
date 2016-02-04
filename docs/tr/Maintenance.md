@@ -1,16 +1,16 @@
 
 ## Maintenance Katmanı
 
-Maintenance eklentisi uygulamanın bütününü yada belirli kısımlarını bakıma alma özelliği sunar. Eğer uygulamanıza ait birden fazla alan adı varsa bakıma alma özelliği bu adresler için de kullanılabilir.
+Bakıma alma eklentisi uygulamanın bütününü yada belirli alan adlarına yönelik bakıma alma özelliği sunar. Eğer uygulamanıza ait birden fazla alan adı varsa bakıma alma özelliği bu adresler için de kullanılabilir.
 
 #### Konfigürasyon
 
-Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Https katmanını tanımlayın.
+Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Maintenance katmanını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
-        'Https' => 'Http\Middlewares\Https',
+        'Maintenance' => 'Http\Middlewares\Maintenance',
     ]
 );
 ```
@@ -18,7 +18,7 @@ $c['middleware']->register(
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$c['middleware']->add(
+$middleware->add(
     [
         'Maintenance',
     ]
@@ -75,10 +75,10 @@ return array(
 );
 ```
 
-Dosya içerisindeki <b>maintenance</b> anahtarları domain adresinin bakıma alınıp alınmadığını kontrol eder, <b>regex</b> anahtarı ise geçerli domain adresleriyle eşleşme yapılabilmesine olanak sağlar. Domain adresinize uygun düzenli ifadeyi regex kısmına girin. Domain adresinizi route yapısına tutturmak <kbd>app/routes.php</kbd> dosyası içerisinde domain grubunuza ait <b>domain</b> ve <b>middleware</b> anahtarlarını aşağıdaki gibi güncelleyin.
+Dosya içerisindeki <kbd>maintenance</kbd> anahtarları domain adresinin bakıma alınıp alınmadığını kontrol eder, <kbd>regex</kbd> anahtarı ise geçerli domain adresleriyle eşleşme yapılabilmesine olanak sağlar. Domain adresinize uygun düzenli ifadeyi regex kısmına girin. Domain adresinizi route yapısına tutturmak <kbd>app/routes.php</kbd> dosyası içerisinde domain grubunuza ait <kbd>domain</kbd> ve <kbd>middleware</kbd> anahtarlarını aşağıdaki gibi güncelleyin.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'GenericUsers',
         'domain' => 'sub.domain.com', 
@@ -91,7 +91,7 @@ $c['router']->group(
 );
 ```
 
-Şimdi test için bakım konfigürasyon dosyanızdaki ilgili domain adına adına ait <b>maintenance</b> değerini <b>down</b> olarak güncelleyin,
+Şimdi test için bakım konfigürasyon dosyanızdaki ilgili domain adına adına ait <kbd>maintenance</kbd> değerini <kbd>down</kbd> olarak güncelleyin,
 
 ```php
 php task app down subdomain
@@ -103,4 +103,4 @@ ve ardından alan adınızın bakıma alınıp alınmadığını sayfayı ziyare
 http://sub.domain.com/
 ```
 
-Herşey yolunda ise <kbd>resources/templates/maintenance.php</kbd> dosyası içerisinde bulunan <b>Service Unavailable</b> yazısı ile karşılaşmanız gerekir.
+Herşey yolunda ise <kbd>resources/templates/maintenance.php</kbd> dosyası içerisinde bulunan <kbd>Service Unavailable</kbd> yazısı ile karşılaşmanız gerekir.

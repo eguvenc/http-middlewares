@@ -6,13 +6,15 @@ Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşt
 
 #### Konfigürasyon
 
-Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Guest katmanını tanımlayın.
+Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Auth ve Guest katmanlarını tanımlayın.
 
 ```php
-$middleware->add(
+
+```php
+$middleware->register(
     [
-        'Auth',
-        'Guest'
+        'Auth' => 'Http\Middlewares\Auth',
+        'Guest' => 'Http\Middlewares\Guest',
     ]
 );
 ```

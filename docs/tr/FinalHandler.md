@@ -10,16 +10,16 @@ Final handler yani sonlandırıcı katman http katmanlarının sonuncusu olarak 
 * <kbd>TerminableInterface</kbd> arayüzünü kullanan katmanların <kbd>terminate()</kbd> metodunu çalıştırmak
 * Hataları yakalamak ve çevre ortamına göre farklı davranışlar sergilemek
 
-Obullo içerisinde şu anki sürümde 2 adet katman sağlayıcı destekleniyor. Bunlar aşağıda listelenmiştir.
+Şu anki sürümde ise 2 adet katman sağlayıcısı destekleniyor. Bunlar aşağıda listelenmiştir.
 
-* Zend Stratigility ( Default )
-* <a href="https://github.com/obullo/relay-middleware" target="_blank">Relay</a> ( Optional )
+* Zend Stratigility ( Varsayılan )
+* <a href="https://github.com/obullo/relay-middleware" target="_blank">Relay</a> ( Opsiyonel )
 
 Herbir katman sağlayıcının kendine ait sonlandırıcısı vardır.
 
 #### Zend Katmanı Kurulumu
 
-Zend final handler için index.php dosyanızda aşağıdaki gibi <kbd>Http\Zend\Stratigility\MiddlewarePipe</kbd> sınıfını kullanmanız gerekir.
+Zend sonlandırıcısı için index.php dosyasında aşağıdaki gibi <kbd>Http\Zend\Stratigility\MiddlewarePipe</kbd> sınıfı kullanılır.
 
 ```php
 /*
@@ -27,7 +27,7 @@ Zend final handler için index.php dosyanızda aşağıdaki gibi <kbd>Http\Zend\
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 /*
 |--------------------------------------------------------------------------
 | Create your http server

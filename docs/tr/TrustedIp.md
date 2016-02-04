@@ -36,7 +36,7 @@ class TrustedIp implements MiddlewareInterface
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine katmanı aşağıdaki gibi tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
     ]
@@ -46,7 +46,7 @@ $c['middleware']->register(
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$c['middleware']->add(
+$middleware->add(
     [
         'TrustedIp',
         'Router',

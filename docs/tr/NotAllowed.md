@@ -1,14 +1,14 @@
 
 ## NotAllowed Katmanı
 
-Uygulamaya gelen Http isteklerine göre metot türlerini filtrelemeyi sağlar. Eğer belirlenen http metotları ( get, post, put, delete ) dışında bir istek gelirse istek, <kbd>405 Method Not Allowed</kbd> sayfası ile engellenir.
+Uygulamaya gelen Http isteklerine göre metot türlerini filtrelemeyi sağlar. Eğer uygulamaya belirlenen http metotları ( get, post, put, delete ) dışında bir istek gelirse istek, <kbd>405 Method Not Allowed</kbd> sayfası ile engellenir.
 
 #### Konfigürasyon
 
 Framework çekirdeğinde çalışan bir katmandır. Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine NotAllowed katmanını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
     ]
@@ -33,7 +33,7 @@ Yukarıdaki kaynaktan <kbd>NotAllowed.php</kbd> dosyasını uygulamanızın <kbd
 
 #### Çalıştırma
 
-NotAllowed katmanı anotasyonlar yardımı ile aşağıdaki gibi controller sınıfı içerisinden
+NotAllowed katmanı anotasyonlar yardımı ile aşağıdaki gibi controller sınıfı içerisinden çalıştırılabilir. Aşağıdaki örneğe göre eğer index metoduna get veya post haricinde bir istek türü gelirse <kbd>GET Method Not Allowed</kbd> hatası almanız gerekir.
 
 ```php
 /**
@@ -49,10 +49,10 @@ public function index()
 }
 ```
 
-çalıştırılabilir. Eğer index metoduna get veya post haricinde bir istek türü gelirse <kbd>GET Method Not Allowed</kbd> hatası almanız gerekir. NotAllowed katmanı aşağıdaki gibi bir route kuralı içerisinden de çalıştırılabilir.
+Katman aşağıdaki gibi bir route kuralı içerisinden de çalıştırılabilir.
 
 ```php
-$c['router']->group(
+$router->group(
     [
     	'middleware' => array()
     ],
@@ -63,7 +63,7 @@ $c['router']->group(
 );
 ```
 
-Yukarıdaki örnekte <kbd>/welcome</kbd> adresine yalnızca <kbd>POST</kbd> ve <kbd>DELETE</kbd> istekleriyle erişilebilir. 
+Yukarıdaki örnekte <kbd>/welcome</kbd> adresine yalnızca <kbd>POST</kbd> ve <kbd>PUT</kbd> istekleriyle erişilebilir. 
 
 ```php
 http://example.com/welcome

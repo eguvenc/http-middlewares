@@ -1,7 +1,7 @@
 
 ## View Katmanı
 
-Layer paketini kullanarak view şablonları oluşturmayı sağlar.
+Layer paketini kullanarak kontrolör dosyaları ile yönetilebilen (HMVC) view şablonları oluşturmayı sağlar.
 
 #### Kurulum
 
@@ -16,7 +16,7 @@ Eğer katman mevcut değilse yuklarıdaki kaynaktan <kbd>View.php</kbd> dosyası
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine katmanı aşağıdaki gibi tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'View' => 'Http\Middlewares\View',
     ]
@@ -26,9 +26,9 @@ $c['middleware']->register(
 Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$c['middleware']->add(
+$middleware->add(
     [
-        'Router',
+        // 'Router',
         'View',
     ]
 );
@@ -46,7 +46,7 @@ Trait Base
 {
     public function __invoke()
     {
-        $this->view->assign(
+        $this->view->withData(
             [
                 'header' => $this->layer->get('views/header'),
                 'footer' => $this->layer->get('views/footer')
@@ -55,6 +55,7 @@ Trait Base
     }
 }
 ```
+
 ve oluşturduğunuz şemayı kontrolör dosyalarından çağırın.
 
 ```php

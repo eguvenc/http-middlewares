@@ -8,7 +8,7 @@ Bu katman uygulamaya <kbd>http://example.com/welcome</kbd> olarak gelen istekler
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine bu katmanını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->register(
     [
         'RewriteLocale' => 'Http\Middlewares\RewriteLocale',
     ]
@@ -28,7 +28,7 @@ Yukarıdaki kaynaktan <kbd>RewriteLocale.php</kbd> dosyasını uygulamanızın <
 Aşağıdaki örnek genel ziyaretçiler route grubu için RewriteLocale katmanını çalıştırır.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'Locale', 
         'domain' => 'mydomain.com', 
@@ -36,8 +36,9 @@ $c['router']->group(
     ],
     function () {
 
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1');
-        $this->get('(?:en|tr|de|nl)', 'welcome');
+        $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+        $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+        $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
         $this->attach('.*');
     }
@@ -47,7 +48,7 @@ $c['router']->group(
 Sadece belirli dizinler için katmanın çalışması sınırlandırılabilir.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'Locale',
         'domain' => '^example.com$',
@@ -55,8 +56,9 @@ $c['router']->group(
     ],
     function () {
 
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1');
-        $this->get('(?:en|tr|de|nl)', 'welcome/index');
+        $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+        $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+        $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
         $this->attach('/');
         $this->attach('welcome');
