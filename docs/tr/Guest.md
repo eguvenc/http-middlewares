@@ -9,9 +9,10 @@ Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşt
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Guest katmanını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->add(
     [
-        'Guest' => 'Http\Middlewares\Guest',
+        'Auth',
+        'Guest'
     ]
 );
 ```
@@ -29,7 +30,7 @@ Yukarıdaki kaynaktan <kbd>Guest.php</kbd> dosyasını uygulamanızın <kbd>app/
 Katmanın çalışması için route yapısına tutturulması gerekir.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'AuthorizedUsers',
         'middleware' => array('Guest')
@@ -43,7 +44,7 @@ $c['router']->group(
 Eğer bu katmanı bir modül için kullanmak istiyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'UnAuthorizedUsers',
         'domain' => 'mydomain.com', 
