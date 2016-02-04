@@ -1,15 +1,7 @@
 
-## Yetki Katmanları
+### Auth Katmanı
 
-Auth katmanı uygulamaya giriş yapmış olan kullanıcıları kontrol ederken Guest katmanı ise uygulamaya giriş yetkisi olmayan kullanıcıları kontrol eder. Auth ve Guest katmanlarının çalışabilmesi için route yapınızda middleware anahtarına ilgili modül için birkez tutturulmaları gerekir.
-
-#### Auth Katmanı
-
-Başarılı oturum açmış ( yetkinlendirilmiş ) kullanıcılara ait katmandır. 
-
-#### Guest Katmanı
-
-Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşturur. Bu katman auth paketini çağırarak kullanıcının sisteme yetkisi olup olmadığını kontrol eder ve yetkisi olmayan kullanıcıları sistem dışına yönlendirir. Route yapısında Auth katmanı ile birlikte kullanılır.
+Başarılı oturum açmış ( yetkinlendirilmiş ) kullanıcılara ait katmandır. Genellikle route yapısında Guest katmanı ile birlikte kullanılır.
 
 <a name="auth-configuration"></a>
 
@@ -18,10 +10,10 @@ Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşt
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Auth ve Guest katmanlarını tanımlayın.
 
 ```php
-$c['middleware']->register(
+$middleware->add(
     [
-        'Auth' => 'Http\Middlewares\Auth',
-        'Guest' => 'Http\Middlewares\Guest',
+        'Auth',
+        'Guest'
     ]
 );
 ```
@@ -32,7 +24,7 @@ Uygulamanıza giriş yapmış kullanıcılara ait bir katman oluşması için be
 Son olarak route grubu içerisinde <b>$this->attach()</b> metodunu kullanarak yetkili kullanıcılara ait sayfayı yada sayfaları belirleyin.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'AuthorizedUsers',
         'middleware' => array('Auth', 'Guest')
@@ -47,7 +39,7 @@ $c['router']->group(
 Eğer bu katmanları bir modül için kullanıyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
 
 ```php
-$c['router']->group(
+$router->group(
     [
         'name' => 'AuthorizedUsers',
         'domain' => 'mydomain.com', 
@@ -64,7 +56,7 @@ Yukarıdaki örnekte <b>modules/accounts</b> klasörü içerisindeki tüm sayfal
 
 ### Tekil Oturum Açma Özelliği
 
-Tekil oturum açma özelliği opsiyonel olarak kullanılır. Auth katmanı içerisinde bu özellik çağrıldığında birden fazla aygıtta yada birbirinden farklı tarayıcılarda oturum açıldığında açılan tüm önceki oturumlar sonlanır ve en son açılan oturum aktif kalır. Unique.session özelliği <kbd>service/user.php</kbd> konfigürasyon dosyasından kapatılıp açılabilir.
+Tekil oturum açma özelliği opsiyonel olarak kullanılır. Auth katmanı içerisinde bu özellik çağrıldığında birden fazla aygıtta yada birbirinden farklı tarayıcılarda oturum açıldığında açılan tüm önceki oturumlar sonlanır ve en son açılan oturum aktif kalır. Unique.session özelliği <kbd>providers/user.php</kbd> konfigürasyon dosyasından kapatılıp açılabilir.
 
 ```php
 
@@ -81,7 +73,7 @@ Tekil oturum açma özelliğinin çalışabilmesi için Auth katmanı içerisind
 ```php
 public function __invoke(Request $request, Response $response, callable $next = null)
 {
-    if ($this->user->identity->check()) {
+    if ($this->getContainer()->get('user')->identity->check()) {
 
         $this->killSessions();  // Terminate multiple logins
 
