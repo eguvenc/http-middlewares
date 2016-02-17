@@ -56,7 +56,7 @@ class Welcome extends Controller
 ```
 #### Hata Yönetimi
 
-Error katmanından sadece uygulama içerisindeki istisnai hatalar ve <kbd>$err</kbd> değişkeni ile gönderilen hatalar kontrol edilebilir. Uygulama evrensel hataları ise <kbd>app/errors.php</kbd> dosyasından yönetilir. Error katmanı içerisinden <kbd>$this->c['app']->exceptionError();</kbd> metodu kullanılarak istisnai hatalar <kbd>app/errors.php</kbd> dosyasına yönlendirilmiş olur.
+Error katmanından sadece uygulama içerisindeki istisnai hatalar ve <kbd>$err</kbd> değişkeni ile gönderilen hatalar kontrol edilebilir. Uygulama evrensel hataları ise <kbd>app/errors.php</kbd> dosyasından yönetilir.
 
 ```php
 class Error implements ErrorMiddlewareInterface, ImmutableContainerAwareInterface
@@ -88,4 +88,4 @@ class Error implements ErrorMiddlewareInterface, ImmutableContainerAwareInterfac
 }
 ```
 
-Yukarıdaki örnekte istisnai hataları ekrana dökmek için  <kbd>$exception->make($error)</kbd> metodu kullanılıyor.
+Error katmanı içerisinde <kbd>$container->get('app')->exceptionError()</kbd> metodu kullanılarak istisnai hatalar <kbd>app/errors.php</kbd> dosyasına yönlendirilmiş olur. Yukarıdaki örnekte istisnai hataları ekrana dökmek için  <kbd>$exception->make($error)</kbd> metodu kullanılıyor.
