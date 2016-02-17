@@ -76,13 +76,17 @@ class Error implements ErrorMiddlewareInterface, ImmutableContainerAwareInterfac
                 $exception = new \Obullo\Error\Exception;
                 echo $exception->make($error);
 
-                $this->getContainer()->get('app')->exceptionError($error);  // Log exceptions using app/errors.php
+                $this->getContainer()->get('app')->exceptionError($error);
+                
+                // Log exceptions using app/errors.php
 
             } else {
             
                 echo $error->getMessage();
 
-                $this->getContainer()->get('app')->exceptionError($error);  // Log exceptions using app/errors.php
+                $this->getContainer()->get('app')->exceptionError($error);
+                
+                // Log exceptions using app/errors.php
             }
         }
 }
