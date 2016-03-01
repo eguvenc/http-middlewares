@@ -30,9 +30,11 @@ Yukarıdaki kaynaktan <kbd>Guest.php</kbd> dosyasını uygulamanızın <kbd>app/
 Katmanın çalışması için route yapısına tutturulması gerekir.
 
 ```php
+/**
+* Unauthorized Users
+*/
 $router->group(
     [
-        'name' => 'AuthorizedUsers',
         'middleware' => array('Guest')
     ],
     function () {
@@ -44,9 +46,11 @@ $router->group(
 Eğer bu katmanı bir <kbd>klasör</kbd> için kullanmak istiyorsanız <kbd>attach</kbd> metodu içerisinde düzenli ifade kullanabilirsiniz.
 
 ```php
+/**
+* Unauthorized Users
+*/
 $router->group(
     [
-        'name' => 'UnAuthorizedUsers',
         'domain' => 'mydomain.com', 
         'middleware' => array('Guest')
     ],
