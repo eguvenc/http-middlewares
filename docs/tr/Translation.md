@@ -15,10 +15,10 @@ $middleware->register(
 );
 ```
 
-Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
+Katmanın çalışabilmesi için evrensel katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$middleware->add(
+$middleware->init(
     [
         // 'Maintenance',
         // 'TrustedIp',
@@ -40,7 +40,7 @@ Yukarıdaki kaynaktan <kbd>Translation.php</kbd> dosyasını uygulamanızın <kb
 
 #### Çalıştırma
 
-Uygulamanızı <kbd>http://myproject/en/welcome</kbd> gibi ziyaret ettiğinizde yerel dil <kbd>locale</kbd> adlı çereze <kbd>en</kbd> olarak kaydedilecektir. Artık geçerli yerel dili <kbd>$this->translator->getLocale()</kbd> fonksiyonu ile çağırabilirsiniz.
+Uygulamanızı <kbd>http://myproject/en/welcome</kbd> gibi ziyaret ettiğinizde yerel dil <kbd>locale</kbd> adlı çereze <kbd>en</kbd> olarak kaydedilecektir. Artık geçerli yerel dili <kbd>$this->translator->getLocale()</kbd> fonksiyonu ile elde edebilirsiniz.
 
 #### Url Adresi Dil Desteği
 
