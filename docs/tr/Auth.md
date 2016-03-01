@@ -31,9 +31,11 @@ Yukarıdaki kaynaktan <kbd>Auth.php</kbd> dosyasını uygulamanızın <kbd>app/c
 Uygulamanıza giriş yapmış kullanıcılara ait bir katman oluşması için belirli bir route grubu yaratıp Auth katmanını <kbd>app/routes.php</kbd> içerisine aşağıdaki gibi ekleyin. Route grubu içerisinde <kbd>$this->attach()</kbd> metodunu kullanarak yetkili kullanıcılara ait sayfayı yada sayfaları belirleyin.
 
 ```php
+/**
+* Authorized Users
+*/
 $router->group(
     [
-        'name' => 'AuthorizedUsers',
         'middleware' => array('Auth', 'Guest')
     ],
     function () {
@@ -46,10 +48,11 @@ $router->group(
 Eğer bu katmanları bir klasör için kullanıyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
 
 ```php
+/**
+* Authorized Users
+*/
 $router->group(
     [
-        'name' => 'AuthorizedUsers',
-        'domain' => 'mydomain.com', 
         'middleware' => array('Auth','Guest')
     ],
     function () {
