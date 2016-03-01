@@ -62,8 +62,4 @@ Debugger sayfası ziyaret edildiğinde javascript kodu istemci olarak websocket 
 http://mylocalproject/debugger
 ```
 
-Eğer debugger kurulumu doğru gerçekleşti ise aşağıdaki gibi bir sayfa ile karşılaşmanız gerekir.
-
-![Debugger](images/debugger.png?raw=true "Debugger Ekran Görüntüsü")
-
-Websocket bağlantısı bazı tarayıcılarda kendiliğinden kopabilir panel üzerindeki ![Closed](images/socket-closed.png?raw=true "Socket Closed") simgesi debugger sunucusuna ait bağlantının koptuğunu ![Open](images/socket-open.png?raw=true "Socket Open") simgesi ise bağlantının aktif olduğunu gösterir. Eğer bağlantı koparsa verileri sayfa yenilemesi olmadan takip edemezsiniz. Böyle bir durumda debugger sunucunuzu ve tarayıcınızı yeniden başlatmayı deneyin.
+Eğer debugger kurulumu doğru gerçekleşti ise yukarıdaki resimde olduğu gibi bir sayfa ile karşılaşmanız gerekir.
