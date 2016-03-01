@@ -25,13 +25,11 @@ Yukarıdaki kaynaktan <kbd>RewriteLocale.php</kbd> dosyasını uygulamanızın <
 
 #### Çalıştırma
 
-Aşağıdaki örnek genel ziyaretçiler route grubu için RewriteLocale katmanını çalıştırır.
+Aşağıdaki örnek uygulamanıza gelen tüm istekler için RewriteLocale katmanını çalıştırır.
 
 ```php
 $router->group(
     [
-        'name' => 'Locale', 
-        'domain' => 'mydomain.com', 
         'middleware' => array('RewriteLocale')
     ],
     function () {
@@ -45,12 +43,11 @@ $router->group(
 );
 ```
 
-Sadece belirli dizinler için katmanın çalışması sınırlandırılabilir.
+Sadece belirli bir <kbd>domain</kbd> adresi yada <kbd>klasörler</kbd> için katmanın çalışmasını sınırlandırabilirsiniz.
 
 ```php
 $router->group(
     [
-        'name' => 'Locale',
         'domain' => '^example.com$',
         'middleware' => array('RewriteLocale')
     ],
