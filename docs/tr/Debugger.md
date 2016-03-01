@@ -9,12 +9,12 @@ Debugger sunucusu çalışırken uygulama ziyaret edilir ve uygulama çalışır
 
 #### Konfigürasyon
 
-Çıktı görüntüleyicinin <kbd>app/middlewares.php</kbd> içerisine eklenmesi gerekmez uygulama tarafından katmanlar içerisine kendiliğinden dahil edilir. Fakat çıktı görüntüleyicinin log dosyalarını okuyabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde aşağıdaki gibi herhangi bir önemlilik seviyesinde tanımlı olması gerekir.
+Çıktı görüntüleyicinin <kbd>app/middlewares.php</kbd> içerisine eklenmesi gerekmez uygulama tarafından katmanlar içerisine kendiliğinden dahil edilir. Fakat log dosyalarının okunabilmesi için <kbd>File</kbd> sürücüsünün logger servisinizde aşağıdaki gibi herhangi bir önemlilik seviyesinde yazıcı olarak tanımlı olması gerekir.
 
 ```php
 'methods' => [
-    ['registerFilter' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
     ['registerHandler' => [5, 'file']],
+    ['name' => 'setWriter','argument' => ['file']],
 ]
 ```
 
