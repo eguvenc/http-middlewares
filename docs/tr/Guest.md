@@ -9,8 +9,6 @@ Oturum açmamış ( yetkinlendirilmemiş ) kullanıcılara ait bir katman oluşt
 Eğer tanımlı değilse <kbd>app/middlewares.php</kbd> dosyası içerisine Auth ve Guest katmanlarını tanımlayın.
 
 ```php
-
-```php
 $middleware->register(
     [
         'Auth' => 'Http\Middlewares\Auth',
@@ -43,7 +41,7 @@ $router->group(
     }
 );
 ```
-Eğer bu katmanı bir modül için kullanmak istiyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
+Eğer bu katmanı bir <kbd>klasör</kbd> için kullanmak istiyorsanız <kbd>attach</kbd> metodu içerisinde düzenli ifade kullanabilirsiniz.
 
 ```php
 $router->group(
