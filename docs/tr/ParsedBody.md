@@ -15,10 +15,10 @@ $middleware->register(
 );
 ```
 
-Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
+Katmanın çalışabilmesi için evrensel katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$middleware->add(
+$middleware->init(
     [
         'ParsedBody',
         'Router',
