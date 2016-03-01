@@ -35,7 +35,8 @@ $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 */
 $server = Obullo\Http\Server::createServerFromRequest(
     $app,
-    Obullo\Log\Benchmark::start($app->getRequest())
+    Obullo\Log\Benchmark::start($app->getRequest()),
+    $app->getResponse()
 );
 /*
 |--------------------------------------------------------------------------
