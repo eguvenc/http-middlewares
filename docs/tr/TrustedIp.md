@@ -1,7 +1,7 @@
 
 ## TrustedIp Katmanı
 
-Eğer sunucunuz ters bir proxy sunucu arkasında ise kullanıcının gerçek ip adresini belirleyebilmek için proxy ip adreslerinin temiz listesine eklenerek ayrıştırılması gerekir. Aksi durumda <kbd>$this->request->getIpAddress()</kbd> metodu proxy sunucu adresine dönecektir. TrustedIp katmanı çalıştırılırsa liste içerisindeki ip adresleri dikkate alınmayarak <kbd>$this->request->getIpAddress()</kbd> metodu kullanıcının gerçek ip adresine döner.
+Eğer sunucunuz ters bir proxy sunucu arkasında ise kullanıcının gerçek ip adresini belirleyebilmek için proxy ip adreslerinin temiz listesine eklenerek ayrıştırılması gerekir. Aksi durumda <kbd>$this->request->getIpAddress()</kbd> metodu proxy sunucu adresine dönecektir. TrustedIp katmanı çalıştırılırsa liste içerisindeki ip adresleri dikkate alınmaz böylece <kbd>$this->request->getIpAddress()</kbd> metodu kullanıcının gerçek ip adresine döner.
 
 ```php
 class TrustedIp implements MiddlewareInterface
@@ -43,10 +43,10 @@ $middleware->register(
 );
 ```
 
-Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
+Katmanın çalışabilmesi için evrensel katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$middleware->add(
+$middleware->init(
     [
         'TrustedIp',
         'Router',
