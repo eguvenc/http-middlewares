@@ -1,7 +1,7 @@
 
 ## View Katmanı
 
-Layer paketini kullanarak kontrolör dosyaları ile yönetilebilen (HMVC) view şablonları oluşturmayı sağlar. Eğer katmanlı mimariye ihtiyacınız yoksa bu katmanı kullanmamanız tavsiye edilir. Daha fazla bilgi View paketi dökümentasyonunu inceleyebilirisiniz.
+Layer paketini kullanarak kontrolör dosyaları ile yönetilebilen (HMVC) view şablonları oluşturmayı sağlar. Eğer katmanlı mimariye ihtiyacınız yoksa bu katmanı kullanmamanız tavsiye edilir. Daha fazla bilgi View paketi dökümentasyonunu inceleyebilirsiniz.
 
 #### Kurulum
 
@@ -9,7 +9,7 @@ Layer paketini kullanarak kontrolör dosyaları ile yönetilebilen (HMVC) view �
 http://github.com/obullo/http-middlewares/
 ```
 
-Eğer katman mevcut değilse yuklarıdaki kaynaktan <kbd>View.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
+Eğer http katmanı mevcut değilse yuklarıdaki kaynaktan <kbd>View.php</kbd> dosyasını uygulamanızın <kbd>app/classes/Http/Middlewares/</kbd> klasörüne kopyalayın.
 
 #### Konfigürasyon
 
