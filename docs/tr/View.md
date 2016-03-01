@@ -1,7 +1,7 @@
 
 ## View Katmanı
 
-Layer paketini kullanarak kontrolör dosyaları ile yönetilebilen (HMVC) view şablonları oluşturmayı sağlar.
+Layer paketini kullanarak kontrolör dosyaları ile yönetilebilen (HMVC) view şablonları oluşturmayı sağlar. Eğer katmanlı mimariye ihtiyacınız yoksa bu katmanı kullanmamanız tavsiye edilir. Daha fazla bilgi View paketi dökümentasyonunu inceleyebilirisiniz.
 
 #### Kurulum
 
