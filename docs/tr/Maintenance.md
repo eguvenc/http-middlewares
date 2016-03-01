@@ -1,7 +1,7 @@
 
 ## Maintenance Katmanı
 
-Bakıma alma eklentisi uygulamanın bütününü yada belirli alan adlarına yönelik bakıma alma özelliği sunar. Eğer uygulamanıza ait birden fazla alan adı varsa bakıma alma özelliği bu adresler için de kullanılabilir.
+Bakıma alma eklentisi uygulamanın bütününü yada belirli alan adlarına yönelik bakıma alma özelliği sağlar. Eğer uygulamanıza ait birden fazla alan adı varsa bakıma alma özelliği bu adresler için de kullanılabilir.
 
 #### Konfigürasyon
 
@@ -15,10 +15,10 @@ $middleware->register(
 );
 ```
 
-Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
+Katmanın çalışabilmesi için evrensel katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$middleware->add(
+$middleware->init(
     [
         'Maintenance',
     ]
@@ -80,7 +80,6 @@ Dosya içerisindeki <kbd>maintenance</kbd> anahtarları domain adresinin bakıma
 ```php
 $router->group(
     [
-        'name' => 'GenericUsers',
         'domain' => 'sub.domain.com', 
         'middleware' => array('Maintenance')
     ],
