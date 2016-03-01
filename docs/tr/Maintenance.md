@@ -85,7 +85,7 @@ $router->group(
     ],
     function () {
 
-        $this->attach('(.*)');
+        $this->attach('.*');
     }
 );
 ```
