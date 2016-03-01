@@ -51,7 +51,6 @@ Eğer bu katmanı bir <kbd>klasör</kbd> için kullanmak istiyorsanız <kbd>atta
 */
 $router->group(
     [
-        'domain' => 'mydomain.com', 
         'middleware' => array('Guest')
     ],
     function () {
