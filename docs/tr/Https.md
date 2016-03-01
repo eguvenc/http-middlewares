@@ -1,7 +1,7 @@
 
 ## Https Katmanı
 
-Uygulamanızda güvenli protokol ile başlaması gereken <b>http://</b> isteklerini <b>https://</b> protokolüne yönlendirir.
+Uygulamanızda güvenli protokol ile başlaması gereken <kbd>http://</kbd> isteklerini <kbd>https://</kbd> protokolüne yönlendirir.
 
 #### Konfigürasyon
 
@@ -37,7 +37,6 @@ Eğer uygulamanıza <kbd>http://examples.com/hello</kbd> isteği gelirse, istek 
 $router->group(
     [
     	'name' => 'Secure',
-    	'domain' => 'mydomain.com',
     	'middleware' => array('Https')
     ],
     function () {
