@@ -43,7 +43,7 @@ $router->group(
 );
 ```
 
-Eğer bu katmanları bir modül için kullanıyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
+Eğer bu katmanları bir klasör için kullanıyorsanız attach metodu içerisinde düzenli ifade kullanabilirsiniz.
 
 ```php
 $router->group(
@@ -59,7 +59,7 @@ $router->group(
 );
 ```
 
-Yukarıdaki örnekte <b>modules/accounts</b> klasörü içerisindeki tüm sayfalarda <b>Auth</b> ve <b>Guest</b> katmanları çalışır.
+Yukarıdaki örnekte <b>folders/accounts</b> klasörü içerisindeki tüm sayfalarda <b>Auth</b> ve <b>Guest</b> katmanları çalışır.
 
 ### Tekil Oturum Açma Özelliği
 
