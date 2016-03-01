@@ -28,7 +28,7 @@ Yukarıdaki kaynaktan <kbd>Auth.php</kbd> dosyasını uygulamanızın <kbd>app/c
 
 ### Çalıştırma
 
-Uygulamanıza giriş yapmış kullanıcılara ait bir katman oluşması için belirli bir route grubu yaratıp Auth katmanını <kbd>app/routes.php</kbd> içerisine aşağıdaki gibi ekleyin. Route grubu içerisinde <b>$this->attach()</b> metodunu kullanarak yetkili kullanıcılara ait sayfayı yada sayfaları belirleyin.
+Uygulamanıza giriş yapmış kullanıcılara ait bir katman oluşması için belirli bir route grubu yaratıp Auth katmanını <kbd>app/routes.php</kbd> içerisine aşağıdaki gibi ekleyin. Route grubu içerisinde <kbd>$this->attach()</kbd> metodunu kullanarak yetkili kullanıcılara ait sayfayı yada sayfaları belirleyin.
 
 ```php
 $router->group(
@@ -59,7 +59,7 @@ $router->group(
 );
 ```
 
-Yukarıdaki örnekte <b>folders/accounts</b> klasörü içerisindeki tüm sayfalarda <b>Auth</b> ve <b>Guest</b> katmanları çalışır.
+Yukarıdaki örnekte <kbd>folders/accounts</kbd> klasörü içerisindeki tüm sayfalarda <kbd>Auth</kbd> ve <kbd>Guest</kbd> katmanları çalışır.
 
 ### Tekil Oturum Açma Özelliği
 
