@@ -42,10 +42,10 @@ Eğer katman mevcut değilse yukarıdaki kaynaktan <kbd>Router.php</kbd> dosyas�
 
 #### Konfigürasyon
 
-Katmanın çalışabilmesi için katmanlar içerisine eklenmesi gerekir.
+Katmanın çalışabilmesi için evrensel katmanlar içerisine eklenmesi gerekir.
 
 ```php
-$middleware->add(
+$middleware->init(
     [
         'Router',
         // 'View',
