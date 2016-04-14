@@ -18,10 +18,6 @@ All middlewares of <kbd>version 1.0</kbd> are listed below.
     </thead>
     <tbody>
         <tr>
-            <td>App</td>
-            <td>Middleware for application boot.</td>
-        </tr>
-        <tr>
             <td>FinalHandler/Zend</td>
             <td>Middleware for application shutdown.</td>
         </tr>
@@ -62,20 +58,12 @@ All middlewares of <kbd>version 1.0</kbd> are listed below.
             <td>Middleware to rewrite language uri segment.</td>
         </tr>
         <tr>
-            <td>Router</td>
-            <td>Middleware to catch initialization of router errors.</td>
-        </tr>
-        <tr>
             <td>Translation</td>
             <td>Middleware to read/write language variable to http cookie.</td>
         </tr>
         <tr>
             <td>TrustedIp</td>
             <td>Middleware to create whitelist for proxy IP addresses.</td>
-        </tr>
-        <tr>
-            <td>View</td>
-            <td>Middleware to create view layouts using layer package.</td>
         </tr>
     </tbody>
 </table>
