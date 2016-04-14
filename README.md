@@ -19,7 +19,7 @@ All middlewares of <kbd>version 1.0</kbd> are listed below.
     <tbody>
         <tr>
             <td>FinalHandler/Zend</td>
-            <td>Middleware for application shutdown.</td>
+            <td>Middleware for application shutdown and terminate http middlewares.</td>
         </tr>
         <tr>
             <td>Auth</td>
@@ -31,7 +31,7 @@ All middlewares of <kbd>version 1.0</kbd> are listed below.
         </tr>
         <tr>
             <td>Error</td>
-            <td>Middleware error interface if you prefer to use Zend\Stratigility.</td>
+            <td>Middleware for catching all application exceptions. Also catches Throwable php errors for PHP 7 and newer versions.</td>
         </tr>
         <tr>
             <td>Guest</td>
